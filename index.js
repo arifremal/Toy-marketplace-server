@@ -59,13 +59,28 @@ async function run() {
       res.send(result);
     });
 
-    app.delete("/toys/:id", async (req, res) => {
+    app.put('"/toyupdate/:id', async (req, res) => {
       const id = req.params.id;
+      const body = req.body;
       const data = { _id: new ObjectId(id) };
-      const result = await toyCollection.deleteOne(data)
+      const updated = {
+        $set: {
+          price: body.price,
+          detail_description: body.detail_description,
+          available_quantity: body.available_quantity,
+        },
+      };
+      const result=await toyCollection.updateOne(data,updated)
       res.send(result)
     });
 
+    app.delete("/toys/:id", async (req, res) => {
+      const id = req.params.id;
+      const data = { _id: new ObjectId(id) };
+      const result = await toyCollection.deleteOne(data);
+      res.send(result);
+    });
+    //
     // Send a ping to confirm a successful connection
     await client.db("admin").command({ ping: 1 });
     console.log(
