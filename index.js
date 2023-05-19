@@ -59,10 +59,10 @@ async function run() {
       res.send(result);
     });
 
-    app.put('"/toyupdate/:id', async (req, res) => {
+    app.put('/toyupdate/:id', async (req, res) => {
       const id = req.params.id;
       const body = req.body;
-      const data = { _id: new ObjectId(id) };
+      const data =  { _id: new ObjectId(id) };
       const updated = {
         $set: {
           price: body.price,
