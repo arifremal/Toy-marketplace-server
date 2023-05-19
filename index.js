@@ -42,7 +42,7 @@ async function run() {
         const query = {_id: new ObjectId(id) }
 
         const options = {
-            projection:{price:1,picture_url:1,name:1,seller_name:1,seller_name:1,available_quantity:1,detail_description:1,rating:1}
+            projection:{price:1,picture_url:1,name:1,seller_email:1,seller_name:1,available_quantity:1,detail_description:1,rating:1}
         }
 
         const result = await toyCollection.findOne(query,options)
@@ -55,7 +55,7 @@ async function run() {
       "Pinged your deployment. You successfully connected to MongoDB!"
     );
   } finally {
-    // Ensures that the client will close when you finish/error
+
     // await client.close();
   }
 }
