@@ -47,13 +47,17 @@ async function run() {
       const id = req.params.id;
       const query = { _id: new ObjectId(id) };
 
-      // const options = {
-      //     projection:{price:1,picture_url:1,name:1,seller_email:1,seller_name:1,available_quantity:1,detail_description:1,rating:1}
-      // }
-
       const result = await toyCollection.findOne(query);
       res.send(result);
     });
+
+
+    app.get('/mytoy/:mail',async(req,res)=>{
+      console.log(req.params.mail);
+      const result= await toyCollection.find({seller_email:req.params.mail}).toArray()
+      res.send(result)
+    })
+
     // Send a ping to confirm a successful connection
     await client.db("admin").command({ ping: 1 });
     console.log(
