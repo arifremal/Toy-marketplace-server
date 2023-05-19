@@ -51,16 +51,20 @@ async function run() {
       res.send(result);
     });
 
-
-    app.get('/mytoy/:mail',async(req,res)=>{
+    app.get("/mytoy/:mail", async (req, res) => {
       console.log(req.params.mail);
-      const result= await toyCollection.find({seller_email:req.params.mail}).toArray()
-      res.send(result)
-    })
+      const result = await toyCollection
+        .find({ seller_email: req.params.mail })
+        .toArray();
+      res.send(result);
+    });
 
-    app.delete('/toys/:id',async(req,res)=>{
-      
-    })
+    app.delete("/toys/:id", async (req, res) => {
+      const id = req.params.id;
+      const data = { _id: new ObjectId(id) };
+      const result = await toyCollection.deleteOne(data)
+      res.send(result)
+    });
 
     // Send a ping to confirm a successful connection
     await client.db("admin").command({ ping: 1 });
