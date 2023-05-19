@@ -36,6 +36,12 @@ async function run() {
       res.send(result);
     });
 
+    app.post("/toysend", async (req, res) => {
+      const data = req.body;
+      const result = await toyCollection.insertOne(data);
+      res.send(result);
+    });
+
     // api create for single Toys
     app.get("/toys/:id", async (req, res) => {
       const id = req.params.id;
